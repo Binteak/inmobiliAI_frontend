@@ -72,6 +72,9 @@ const emptyDraft = (): PropertyDraft => ({
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
+  readonly apiUrl = environment.apiUrl;
+
   selectedFile: File | null = null;
   draft: PropertyDraft = emptyDraft();
 
@@ -90,7 +93,7 @@ export class AppComponent {
 
   usingSample: string | null = null;
 
-  readonly apiUrl = environment.apiUrl;
+
 
   constructor(private readonly http: HttpClient) {
     this.loadSampleFiles();
