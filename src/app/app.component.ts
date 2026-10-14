@@ -4,6 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { environment } from '../environments/environment';
+
 interface PropertyDraft {
   operation: string;
   property_type: string;
@@ -88,7 +90,7 @@ export class AppComponent {
 
   usingSample: string | null = null;
 
-  readonly apiUrl = 'http://localhost:8006';
+  readonly apiUrl = environment.apiUrl;
 
   constructor(private readonly http: HttpClient) {
     this.loadSampleFiles();
