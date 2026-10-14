@@ -1,0 +1,375 @@
+.header-divider {
+    margin-top: 24px;
+  width: 100%;
+  height: 1px;
+  background-color: #a3a4dc79;
+  margin-bottom: 24px;
+}
+
+
+
+
+
+/* Indicador de análisis de IA */
+.ai-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 20px;
+  margin-top: 20px;
+  text-align: center;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  animation: ai-appear 0.3s ease-out;
+}
+
+/* Círculo giratorio */
+.ai-spinner {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+}
+
+.ai-spinner-ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid #e5e7eb;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: ai-spin 0.9s linear infinite;
+}
+
+.ring-two,
+.ring-three {
+  display: none;
+}
+
+/* Letras IA */
+.ai-core {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.ai-core span {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Mensaje */
+.ai-loading h3 {
+  margin: 0 0 6px;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ai-loading p {
+  margin: 0 0 18px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* Barra de carga */
+.ai-progress {
+  width: min(240px, 100%);
+  height: 4px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #e5e7eb;
+}
+
+.ai-progress-bar {
+  width: 40%;
+  height: 100%;
+  border-radius: 10px;
+  background: #6366f1;
+  animation: ai-progress-move 1.5s ease-in-out infinite;
+}
+
+.ai-loading-caption {
+  margin-top: 10px;
+  color: #9ca3af;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+@keyframes ai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ai-progress-move {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(360%);
+  }
+}
+
+@keyframes ai-appear {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* =========================================
+   ARCHIVOS DE PRUEBA · DISEÑO COMPACTO
+   ========================================= */
+
+.sample-files-card {
+  margin-top: 18px;
+  padding: 19px 20px;
+  background: #fff;
+  border: 1px solid #e6e9f1;
+  border-radius: 14px;
+}
+
+.sample-files-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 15px;
+}
+
+.sample-files-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #f2f0ff;
+  color: #6356cf;
+  font-size: 19px;
+}
+
+.sample-files-heading-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.sample-files-heading .section-kicker {
+  display: block;
+  margin-bottom: 3px;
+  color: #7569ce;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.9px;
+}
+
+.sample-files-heading h3 {
+  margin: 0;
+  color: #263044;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sample-files-heading p {
+  margin: 4px 0 0;
+  color: #7b8495;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Listado de PDF */
+
+.sample-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sample-file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  padding: 10px 11px;
+  border: 1px solid #eceef4;
+  border-radius: 10px;
+  background: #fcfcfe;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.sample-file-row:hover {
+  border-color: #d8d4f7;
+  background: #faf9ff;
+}
+
+.sample-file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pdf-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 35px;
+  width: 35px;
+  height: 39px;
+  border: 1px solid #f0dfe1;
+  border-radius: 7px;
+  background: #fff4f4;
+  color: #c34b55;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.sample-file-name {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.sample-file-name strong {
+  overflow: hidden;
+  color: #354054;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sample-file-name > span {
+  color: #8a92a2;
+  font-size: 10px;
+}
+
+/* Botones pequeños y uniformes */
+
+.sample-file-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.sample-use-button,
+.sample-download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 112px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.sample-use-button {
+  border: 1px solid #dcd8fa;
+  background: #f3f1ff;
+  color: #5b4bc4;
+}
+
+.sample-use-button:hover:not(:disabled) {
+  border-color: #c5bdf5;
+  background: #e9e5ff;
+}
+
+.sample-download-button {
+  border: 1px solid #e0e4ec;
+  background: #fff;
+  color: #5d687b;
+}
+
+.sample-download-button:hover:not(:disabled) {
+  border-color: #cbd2df;
+  background: #f3f5f9;
+  color: #303b50;
+}
+
+.sample-use-button:disabled,
+.sample-download-button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.sample-use-button:focus-visible,
+.sample-download-button:focus-visible {
+  outline: 2px solid #9c91f0;
+  outline-offset: 2px;
+}
+
+/* Aviso y mensajes */
+
+.samples-message {
+  padding: 13px;
+  border: 1px dashed #e0e4ed;
+  border-radius: 9px;
+  color: #778196;
+  font-size: 12px;
+}
+
+.sample-files-note {
+  margin: 12px 0 0;
+  color: #858da0;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+/* Adaptación móvil */
+
+@media (max-width: 600px) {
+  .sample-files-card {
+    padding: 15px;
+  }
+
+  .sample-file-row {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sample-file-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .sample-use-button,
+  .sample-download-button {
+    width: 100%;
+    min-width: 0;
+    padding: 0 6px;
+    font-size: 10px;
+  }
+
+  .sample-file-name strong {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
