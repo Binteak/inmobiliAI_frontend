@@ -572,3 +572,95 @@ button { -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior: auto; }
   .ai-spinner-ring, .ai-progress-bar, .ai-loading { animation-duration: 3s; }
 }
+
+
+/* =========================================================
+   MOBILE APP NAVIGATION - FOOTER
+   ========================================================= */
+
+@media (max-width: 899px) {
+
+  .app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: 0;
+  }
+
+  /* Sidebar superior: únicamente identidad de marca */
+  .sidebar {
+    position: relative;
+    top: auto;
+    z-index: 20;
+    min-height: 62px;
+    padding: 12px 18px;
+    justify-content: flex-start;
+    border-bottom: 1px solid #2c3b55;
+  }
+
+  /* Ocultar perfil e indicador verde */
+  .sidebar-bottom {
+    display: none !important;
+  }
+
+  /* El contenido ocupa todo el espacio disponible */
+  .main-content {
+    flex: 1;
+    width: 100%;
+    padding-bottom: 30px;
+  }
+
+  /* Navegación inferior */
+  .mobile-bottom-nav {
+    position: sticky;
+    bottom: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, .97);
+    border-top: 1px solid #e4e9f0;
+    box-shadow: 0 -4px 18px rgba(23, 36, 59, .06);
+    backdrop-filter: blur(14px);
+  }
+
+  .mobile-bottom-nav .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    min-height: 48px;
+    margin: 0;
+    padding: 7px 5px;
+    border-radius: 10px;
+    color: #71809a;
+    font-size: 11px;
+    font-weight: 650;
+    text-align: center;
+  }
+
+  .mobile-bottom-nav .nav-item.active {
+    background: #edf2ff;
+    color: #375de5;
+  }
+
+  .mobile-bottom-nav .nav-item span {
+    font-size: 17px;
+    line-height: 1;
+  }
+
+  .mobile-bottom-nav .nav-item.active span {
+    color: #375de5;
+  }
+}
+
+/* En escritorio no mostramos la navegación móvil */
+@media (min-width: 900px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}

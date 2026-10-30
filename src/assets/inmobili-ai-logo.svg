@@ -1,0 +1,44 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="5" x2="58" y2="61" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#243B61"></stop>
+      <stop offset="1" stop-color="#111D33"></stop>
+    </linearGradient>
+    <linearGradient id="accent" x1="23" y1="14" x2="48" y2="43" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7DD3FC"></stop>
+      <stop offset="1" stop-color="#3B82F6"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo original -->
+  <rect width="64" height="64" rx="18" fill="url(#bg)"></rect>
+
+  <!-- Dibujo reducido y centrado -->
+  <g transform="translate(7 7) scale(.78)">
+    <!-- Edificio -->
+    <path d="M13 54V28L31 17L49 28V54H13Z" stroke="#F8FAFC" stroke-width="2.6" stroke-linejoin="round"></path>
+
+    <!-- Ventanas -->
+    <path d="M20 34H25V39H20V34Z M29 34H34V39H29V34Z
+             M38 34H43V39H38V34Z
+             M20 44H25V49H20V44Z M29 44H34V49H29V44Z
+             M38 44H43V49H38V44Z" fill="#CBD5E1"></path>
+
+    <!-- Circuito neuronal -->
+    <path d="M31 17V11H39V15H46" stroke="url(#accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+
+    <path d="M39 15V22H48V28" stroke="url(#accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+
+    <path d="M39 22H34" stroke="url(#accent)" stroke-width="2.5" stroke-linecap="round"></path>
+
+    <!-- Nodos -->
+    <circle cx="31" cy="11" r="3" fill="#7DD3FC"></circle>
+    <circle cx="46" cy="15" r="3" fill="#38BDF8"></circle>
+    <circle cx="48" cy="28" r="3" fill="#60A5FA"></circle>
+    <circle cx="34" cy="22" r="2.5" fill="#7DD3FC"></circle>
+
+    <!-- Base -->
+    <path d="M10 54H52" stroke="#7DD3FC" stroke-width="2.5" stroke-linecap="round"></path>
+  </g>
+</svg>

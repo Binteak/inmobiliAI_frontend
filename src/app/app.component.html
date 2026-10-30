@@ -1,7 +1,9 @@
 <div class="app-shell">
   <aside class="sidebar">
     <div class="brand">
-      <div class="brand-mark">P</div>
+      <div class="brand-mark">
+        <img src="/assets/inmobili-ai-logo.svg" alt="Logotipo de InmobiliAI">
+      </div>
       <div class="brand-name">
         <strong>InmobiliAI</strong>
         <span>REAL ESTATE AI</span>
@@ -9,35 +11,35 @@
     </div>
 
 
-<div class="side-label">ESPACIO DE TRABAJO</div>
+    <div class="side-label">ESPACIO DE TRABAJO</div>
 
-<div class="nav-item active">
-  <span>▦</span>
-  Preparar anuncio
-</div>
+    <div class="nav-item active">
+      <span>▦</span>
+      Preparar anuncio
+    </div>
 
-<div class="nav-item muted">
-  <span>▤</span>
-  Inmuebles procesados
-  <small>Próximamente</small>
-</div>
+    <div class="nav-item muted">
+      <span>▤</span>
+      Inmuebles procesados
+      <small>Próximamente</small>
+    </div>
 
-<div class="header-divider"></div>
+    <div class="header-divider"></div>
 
-<div class="sidebar-tip">
-  <span class="tip-icon">✦ </span>
-  <strong>Tu asistente inmobiliario</strong>
-  <p>Transforma documentación inmobiliaria en anuncios revisables y detecta la información pendiente.</p>
-</div>
+    <div class="sidebar-tip">
+      <span class="tip-icon">✦ </span>
+      <strong>Tu asistente inmobiliario</strong>
+      <p>Transforma documentación inmobiliaria en anuncios revisables y detecta la información pendiente.</p>
+    </div>
 
-<div class="sidebar-bottom">
-  <div class="avatar">AI</div>
-  <div>
-    <strong>Demo inmobiliaria</strong>
-    <span>Entorno de portfolio</span>
-  </div>
-  <span class="online-dot"></span>
-</div>
+    <div class="sidebar-bottom">
+      <div class="avatar">AI</div>
+      <div>
+        <strong>Alvaro Ruiz Ramírez</strong>
+        <span>Demo de portfolio</span>
+      </div>
+      <span class="online-dot"></span>
+    </div>
 
   </aside>
 
@@ -50,524 +52,453 @@
       </div>
 
 
-  <div class="status-pill">
-    <span></span>
-    Asistente IA
-  </div>
-</header>
+      <div class="status-pill">
+        <span></span>
+        Asistente IA
+      </div>
+    </header>
 
-<div class="privacy-note">
-  <span class="note-icon">盾</span>
-  <div>
-    <strong>Control profesional en todo momento</strong>
-    <p>Los datos y textos generados son borradores. Tú revisas, corriges y decides qué información se publica.</p>
-  </div>
-</div>
-
-<!-- PASO 01: DOCUMENTO -->
-<section class="upload-card">
-  <div class="section-heading">
-    <div class="step-number">01</div>
-    <div>
-      <div class="section-kicker">PASO 1 · DOCUMENTACIÓN</div>
-      <h2>Documento de origen</h2>
-      <p>Selecciona la ficha, nota descriptiva o documento PDF del inmueble.</p>
+    <div class="privacy-note">
+      <span class="note-icon">盾</span>
+      <div>
+        <strong>Control profesional en todo momento</strong>
+        <p>Los datos y textos generados son borradores. Tú revisas, corriges y decides qué información se publica.</p>
+      </div>
     </div>
-  </div>
 
-  <label
-    class="dropzone"
-    for="pdfFile"
-    [class.has-file]="selectedFile"
-  >
-    <div class="upload-icon">↑</div>
+    <!-- PASO 01: DOCUMENTO -->
+    <section class="upload-card">
+      <div class="section-heading">
+        <div class="step-number">01</div>
+        <div>
+          <div class="section-kicker">PASO 1 · DOCUMENTACIÓN</div>
+          <h2>Documento de origen</h2>
+          <p>Selecciona la ficha, nota descriptiva o documento PDF del inmueble.</p>
+        </div>
+      </div>
 
-    <strong>
-      {{ selectedFile ? selectedFile.name : 'Arrastra tu PDF aquí o selecciónalo' }}
-    </strong>
+      <label class="dropzone" for="pdfFile" [class.has-file]="selectedFile">
+        <div class="upload-icon">↑</div>
 
-    <span>
-      {{
-        selectedFile
+        <strong>
+          {{ selectedFile ? selectedFile.name : 'Arrastra tu PDF aquí o selecciónalo' }}
+        </strong>
+
+        <span>
+          {{
+          selectedFile
           ? (selectedFile.size / 1024 | number:'1.0-0') + ' KB · Archivo seleccionado'
           : 'PDF con texto seleccionable · Máximo 12 MB'
-      }}
-    </span>
+          }}
+        </span>
 
-    <span class="browse-link">
-      {{ selectedFile ? 'Seleccionar otro documento' : 'Explorar archivos' }}
-    </span>
-  </label>
+        <span class="browse-link">
+          {{ selectedFile ? 'Seleccionar otro documento' : 'Explorar archivos' }}
+        </span>
+      </label>
 
-  <input
-    id="pdfFile"
-    type="file"
-    accept=".pdf,application/pdf"
-    (change)="onFileSelected($event)"
-    hidden
-  />
+      <input id="pdfFile" type="file" accept=".pdf,application/pdf" (change)="onFileSelected($event)" hidden />
 
-  <div class="upload-actions">
-    <div class="secure-note">
-    
-      <span>Procesamiento mediante el backend configurado</span>
-    </div>
+      <div class="upload-actions">
+        <div class="secure-note">
 
-    <button
-      class="primary-button"
-      type="button"
-      (click)="analyze()"
-      [disabled]="!selectedFile || loading"
-    >
-      <span *ngIf="!loading">✦ Analizar documento</span>
-      <span *ngIf="loading" class="loading-text">Analizando documento…</span>
-    </button>
+          <span>Procesamiento mediante el backend configurado</span>
+        </div>
+
+        <button class="primary-button" type="button" (click)="analyze()" [disabled]="!selectedFile || loading">
+          <span *ngIf="!loading">✦ Analizar documento</span>
+          <span *ngIf="loading" class="loading-text">Analizando documento…</span>
+        </button>
 
 
 
-<!-- Spinner futurista de IA -->
-<div class="ai-loading" *ngIf="loading" role="status" aria-live="polite">
-  <div class="ai-spinner">
-    <div class="ai-spinner-ring ring-one"></div>
-    <div class="ai-spinner-ring ring-two"></div>
-    <div class="ai-spinner-ring ring-three"></div>
+        <!-- Spinner futurista de IA -->
+        <div class="ai-loading" *ngIf="loading" role="status" aria-live="polite">
+          <div class="ai-spinner">
+            <div class="ai-spinner-ring ring-one"></div>
+            <div class="ai-spinner-ring ring-two"></div>
+            <div class="ai-spinner-ring ring-three"></div>
 
-    <div class="ai-core">
-      <span>IA</span>
-      <div class="ai-core-glow"></div>
-    </div>
-  </div>
+            <div class="ai-core">
+              <span>IA</span>
+              <div class="ai-core-glow"></div>
+            </div>
+          </div>
 
-  <h3>Analizando documento con IA</h3>
-  <p>Extrayendo información del inmueble...</p>
+          <h3>Analizando documento con IA</h3>
+          <p>Extrayendo información del inmueble...</p>
 
-  <div class="ai-progress">
-    <div class="ai-progress-bar"></div>
-  </div>
+          <div class="ai-progress">
+            <div class="ai-progress-bar"></div>
+          </div>
 
-  <span class="ai-loading-caption">PROCESANDO DOCUMENTO · ESPERA UN MOMENTO</span>
-</div>
-  </div>
-
-
-
-<!-- ARCHIVOS DE PRUEBA -->
-<div class="sample-files-card">
-  <div class="sample-files-heading">
-    <div class="sample-files-icon">↓</div>
-
-    <div class="sample-files-heading-copy">
-      <span class="section-kicker">MODO DEMOSTRACIÓN</span>
-      <h3>Archivos de prueba</h3>
-      <p>Prueba la aplicación con uno de estos documentos PDF.</p>
-    </div>
-  </div>
-
-  <div *ngIf="loadingSamples" class="samples-message">
-    Cargando documentos…
-  </div>
-
-  <div
-    *ngIf="!loadingSamples && sampleFiles.length > 0"
-    class="sample-files-list"
-  >
-    <div class="sample-file-row" *ngFor="let file of sampleFiles">
-      <div class="sample-file-info">
-        <div class="pdf-icon">PDF</div>
-
-        <div class="sample-file-name">
-          <strong [title]="file.name">{{ file.name }}</strong>
-          <span>{{ formatFileSize(file.size) }}</span>
+          <span class="ai-loading-caption">PROCESANDO DOCUMENTO · ESPERA UN MOMENTO</span>
         </div>
       </div>
 
-      <div class="sample-file-actions">
-        <button
-          class="sample-use-button"
-          type="button"
-          (click)="useSample(file)"
-          [disabled]="usingSample === file.name || loading"
-        >
-          <span>
-            {{ usingSample === file.name ? 'Preparando…' : '↑ Usar documento' }}
+
+
+      <!-- ARCHIVOS DE PRUEBA -->
+      <div class="sample-files-card">
+        <div class="sample-files-heading">
+          <div class="sample-files-icon">↓</div>
+
+          <div class="sample-files-heading-copy">
+            <span class="section-kicker">MODO DEMOSTRACIÓN</span>
+            <h3>Archivos de prueba</h3>
+            <p>Prueba la aplicación con uno de estos documentos PDF.</p>
+          </div>
+        </div>
+
+        <div *ngIf="loadingSamples" class="samples-message">
+          Cargando documentos…
+        </div>
+
+        <div *ngIf="!loadingSamples && sampleFiles.length > 0" class="sample-files-list">
+          <div class="sample-file-row" *ngFor="let file of sampleFiles">
+            <div class="sample-file-info">
+              <div class="pdf-icon">PDF</div>
+
+              <div class="sample-file-name">
+                <strong [title]="file.name">{{ file.name }}</strong>
+                <span>{{ formatFileSize(file.size) }}</span>
+              </div>
+            </div>
+
+            <div class="sample-file-actions">
+              <button class="sample-use-button" type="button" (click)="useSample(file)"
+                [disabled]="usingSample === file.name || loading">
+                <span>
+                  {{ usingSample === file.name ? 'Preparando…' : '↑ Usar documento' }}
+                </span>
+              </button>
+
+              <button class="sample-download-button" type="button" (click)="downloadSample(file)"
+                [disabled]="downloadingSample === file.name" [attr.aria-label]="'Descargar ' + file.name"
+                title="Descargar PDF">
+                <span aria-hidden="true">↓</span>
+                {{ downloadingSample === file.name ? 'Descargando…' : 'Descargar' }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!loadingSamples && sampleFiles.length === 0" class="samples-message">
+          {{ samplesError || 'No hay documentos de prueba disponibles.' }}
+        </div>
+
+        <p class="sample-files-note">
+          Los documentos son ficticios. Puedes cargarlos directamente o descargarlos
+          para utilizarlos más adelante.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- MENSAJES -->
+    <div class="alert error" *ngIf="error" role="alert">
+      <span>!</span>
+      <div>{{ error }}</div>
+    </div>
+
+    <div class="alert success" *ngIf="success" role="status">
+      <span>✓</span>
+      <div>{{ success }}</div>
+    </div>
+
+    <!-- PASO 02: RESULTADOS -->
+    <section class="results-section" id="results" *ngIf="analyzed">
+
+
+      <div class="results-heading">
+        <div class="section-heading">
+          <div class="step-number">02</div>
+          <div>
+            <div class="section-kicker">PASO 2 · REVISIÓN DEL INMUEBLE</div>
+            <h2>Información extraída</h2>
+            <p>Revisa los datos identificados en el documento y completa los campos que falten.</p>
+          </div>
+        </div>
+
+        <span class="mode-chip">
+          <span class="mode-dot"></span>
+          {{ draft.mode === 'ai' ? 'IA conectada' : 'Modo demo' }}
+        </span>
+      </div>
+
+
+      <!-- RESUMEN DE PENDIENTES -->
+      <div class="review-banner" *ngIf="missingCount > 0">
+        <span class="review-icon">!</span>
+        <div>
+          <strong>{{ missingCount }} dato(s) pendiente(s) de confirmar</strong>
+          <p>{{ draft.missing_fields.join(' · ') }}</p>
+          <small>Puedes preparar un documento Word para solicitar esta información al propietario.</small>
+        </div>
+      </div>
+
+      <div class="review-banner review-complete" *ngIf="missingCount === 0">
+        <span class="review-icon">✓</span>
+        <div>
+          <strong>El análisis no ha señalado campos pendientes</strong>
+          <p>Verifica igualmente todos los datos antes de utilizar el anuncio.</p>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <!-- INFORMACIÓN PRINCIPAL -->
+        <div class="form-section-title">
+          <span>01</span>
+          <div>
+            <h3>Información principal</h3>
+            <p>Identificación y datos comerciales del inmueble.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>Operación</span>
+            <select [ngModel]="draft.operation" (ngModelChange)="onSelectChange('operation', $event)">
+              <option>Venta</option>
+              <option>Alquiler</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Tipo de inmueble</span>
+            <select [ngModel]="draft.property_type" (ngModelChange)="onSelectChange('property_type', $event)">
+              <option>Piso</option>
+              <option>Casa</option>
+              <option>Chalet</option>
+              <option>Ático</option>
+              <option>Dúplex</option>
+              <option>Adosado</option>
+              <option>Terreno</option>
+              <option>Local</option>
+              <option>Otro</option>
+            </select>
+          </label>
+
+          <label class="field full">
+            <span>Título del anuncio</span>
+            <input [(ngModel)]="draft.title" placeholder="Ej. Piso luminoso de tres dormitorios" maxlength="100">
+          </label>
+
+          <label class="field">
+            <span>Precio (€)</span>
+            <input type="number" [(ngModel)]="draft.price_eur" placeholder="Por confirmar" min="0">
+          </label>
+
+          <label class="field">
+            <span>Provincia</span>
+            <input [(ngModel)]="draft.province" placeholder="Provincia">
+          </label>
+
+          <label class="field">
+            <span>Localidad</span>
+            <input [(ngModel)]="draft.city" placeholder="Localidad">
+          </label>
+
+          <label class="field full">
+            <span>Dirección o zona publicable</span>
+            <input [(ngModel)]="draft.address" placeholder="Solo la información que se quiera publicar">
+            <small class="field-hint">Evita incluir datos privados del propietario en el anuncio.</small>
+          </label>
+        </div>
+
+        <!-- CARACTERÍSTICAS -->
+        <div class="form-section-title separated">
+          <span>02</span>
+          <div>
+            <h3>Características del inmueble</h3>
+            <p>Superficies, distribución, equipamiento y estado de conservación.</p>
+          </div>
+        </div>
+
+        <div class="form-grid three-cols">
+          <label class="field">
+            <span>Superficie construida (m²)</span>
+            <input type="number" [(ngModel)]="draft.built_area_m2" min="0">
+          </label>
+
+          <label class="field">
+            <span>Superficie útil (m²)</span>
+            <input type="number" [(ngModel)]="draft.usable_area_m2" min="0">
+          </label>
+
+          <label class="field">
+            <span>Dormitorios</span>
+            <input type="number" [(ngModel)]="draft.bedrooms" min="0">
+          </label>
+
+          <label class="field">
+            <span>Baños</span>
+            <input type="number" [(ngModel)]="draft.bathrooms" min="0">
+          </label>
+
+          <label class="field">
+            <span>Planta</span>
+            <input [(ngModel)]="draft.floor" placeholder="No consta">
+          </label>
+
+          <label class="field">
+            <span>Estado de conservación</span>
+            <select [ngModel]="draft.condition" (ngModelChange)="onSelectChange('condition', $event)">
+              <option>No consta</option>
+              <option>A reformar</option>
+              <option>Buen estado</option>
+              <option>Reformado</option>
+              <option>Obra nueva</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Ascensor</span>
+            <select [ngModel]="draft.elevator" (ngModelChange)="onSelectChange('elevator', $event)">
+              <option>No consta</option>
+              <option>Sí</option>
+              <option>No</option>
+              <option>Dispone</option>
+              <option>No dispone</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Terraza</span>
+            <select [ngModel]="draft.terrace" (ngModelChange)="onSelectChange('terrace', $event)">
+              <option>No consta</option>
+              <option>Sí</option>
+              <option>No</option>
+              <option>Dispone</option>
+              <option>No dispone</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Garaje</span>
+            <select [ngModel]="draft.parking" (ngModelChange)="onSelectChange('parking', $event)">
+              <option>No consta</option>
+              <option>Sí</option>
+              <option>No</option>
+              <option>Incluido</option>
+              <option>No incluido</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Trastero</span>
+            <select [ngModel]="draft.storage_room" (ngModelChange)="onSelectChange('storage_room', $event)">
+              <option>No consta</option>
+              <option>Sí</option>
+              <option>No</option>
+              <option>Incluido</option>
+              <option>No incluido</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Calificación energética</span>
+            <input [(ngModel)]="draft.energy_rating" placeholder="No consta">
+          </label>
+        </div>
+
+        <!-- DESCRIPCIÓN -->
+        <div class="form-section-title separated">
+          <span>03</span>
+          <div>
+            <h3>Descripción comercial</h3>
+            <p>Redacta, genera y revisa el texto antes de utilizarlo.</p>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>Descripción del inmueble</span>
+          <textarea [(ngModel)]="draft.description" rows="7" maxlength="3000"
+            placeholder="La descripción del inmueble aparecerá aquí..."></textarea>
+          <small class="field-hint">
+            {{ generating
+            ? 'Actualizando la descripción…'
+            : 'Se rehace automáticamente al cambiar un desplegable y sustituye lo que hayas escrito. Evita afirmaciones
+            no verificadas sobre vistas, orientación o servicios cercanos.' }}
+          </small>
+        </label>
+
+        <!-- ACCIONES -->
+        <div class="form-section-title separated">
+          <span>04</span>
+          <div>
+            <h3>Preparar documentación</h3>
+            <p>Elige cómo quieres continuar con el borrador.</p>
+          </div>
+        </div>
+
+        <div class="action-panel">
+          <div class="action-card word-action">
+
+            <div class="action-copy">
+              <h4>Solicitud de información al propietario</h4>
+              <p>Prepara un documento Word editable con los datos que faltan por confirmar.</p>
+              <small>DOCX · Editable en Microsoft Word y aplicaciones compatibles</small>
+            </div>
+            <button class="primary-button" type="button" (click)="generateMissingInfoWord()"
+              [disabled]="!analyzed || loading || generatingWord">
+              <span *ngIf="!generatingWord">↓ Generar solicitud Word</span>
+              <span *ngIf="generatingWord">Preparando documento…</span>
+            </button>
+          </div>
+
+          <div class="action-card">
+
+            <div class="action-copy">
+              <h4>Anuncio completo</h4>
+              <p>Copia el título, precio, características, descripción y comprobaciones pendientes.</p>
+            </div>
+            <button class="secondary-button" type="button" (click)="copyListing()"
+              [disabled]="!analyzed || loading || generatingWord">
+              Copiar anuncio
+            </button>
+          </div>
+        </div>
+
+        <div class="privacy-footnote">
+          <span>ⓘ</span>
+          Revisa el documento Word antes de enviarlo. La herramienta no contacta con el propietario ni publica anuncios
+          por su cuenta.
+        </div>
+      </div>
+
+      <!-- DATOS EXTRAÍDOS -->
+      <div class="facts-card" *ngIf="draft.extracted_facts.length">
+        <div class="facts-heading">
+          <div>
+            <div class="section-kicker">TRAZABILIDAD</div>
+            <h3>Datos detectados en el documento</h3>
+          </div>
+          <span class="facts-count">{{ draft.extracted_facts.length }} elementos</span>
+        </div>
+
+        <p>Contrasta estos elementos con el documento original para verificar la extracción.</p>
+
+        <div class="fact-list">
+          <span *ngFor="let fact of draft.extracted_facts">
+            <span class="fact-check">✓</span>
+            {{ fact }}
           </span>
-        </button>
-
-        <button
-          class="sample-download-button"
-          type="button"
-          (click)="downloadSample(file)"
-          [disabled]="downloadingSample === file.name"
-          [attr.aria-label]="'Descargar ' + file.name"
-          title="Descargar PDF"
-        >
-          <span aria-hidden="true">↓</span>
-          {{ downloadingSample === file.name ? 'Descargando…' : 'Descargar' }}
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div
-    *ngIf="!loadingSamples && sampleFiles.length === 0"
-    class="samples-message"
-  >
-    {{ samplesError || 'No hay documentos de prueba disponibles.' }}
-  </div>
-
-  <p class="sample-files-note">
-    Los documentos son ficticios. Puedes cargarlos directamente o descargarlos
-    para utilizarlos más adelante.
-  </p>
-</div>
-
-</section>
-
-<!-- MENSAJES -->
-<div class="alert error" *ngIf="error" role="alert">
-  <span>!</span>
-  <div>{{ error }}</div>
-</div>
-
-<div class="alert success" *ngIf="success" role="status">
-  <span>✓</span>
-  <div>{{ success }}</div>
-</div>
-
-<!-- PASO 02: RESULTADOS -->
-<section class="results-section" id="results" *ngIf="analyzed">
-
-
-  <div class="results-heading">
-  <div class="section-heading">
-    <div class="step-number">02</div>
-    <div>
-      <div class="section-kicker">PASO 2 · REVISIÓN DEL INMUEBLE</div>
-      <h2>Información extraída</h2>
-      <p>Revisa los datos identificados en el documento y completa los campos que falten.</p>
-    </div>
-  </div>
-
-  <span class="mode-chip">
-    <span class="mode-dot"></span>
-    {{ draft.mode === 'ai' ? 'IA conectada' : 'Modo demo' }}
-  </span>
-</div>
-
-
-  <!-- RESUMEN DE PENDIENTES -->
-  <div class="review-banner" *ngIf="missingCount > 0">
-    <span class="review-icon">!</span>
-    <div>
-      <strong>{{ missingCount }} dato(s) pendiente(s) de confirmar</strong>
-      <p>{{ draft.missing_fields.join(' · ') }}</p>
-      <small>Puedes preparar un documento Word para solicitar esta información al propietario.</small>
-    </div>
-  </div>
-
-  <div class="review-banner review-complete" *ngIf="missingCount === 0">
-    <span class="review-icon">✓</span>
-    <div>
-      <strong>El análisis no ha señalado campos pendientes</strong>
-      <p>Verifica igualmente todos los datos antes de utilizar el anuncio.</p>
-    </div>
-  </div>
-
-  <div class="form-card">
-    <!-- INFORMACIÓN PRINCIPAL -->
-    <div class="form-section-title">
-      <span>01</span>
-      <div>
-        <h3>Información principal</h3>
-        <p>Identificación y datos comerciales del inmueble.</p>
-      </div>
-    </div>
-
-    <div class="form-grid">
-      <label class="field">
-        <span>Operación</span>
-        <select
-          [ngModel]="draft.operation"
-          (ngModelChange)="onSelectChange('operation', $event)"
-        >
-          <option>Venta</option>
-          <option>Alquiler</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Tipo de inmueble</span>
-        <select
-          [ngModel]="draft.property_type"
-          (ngModelChange)="onSelectChange('property_type', $event)"
-        >
-          <option>Piso</option>
-          <option>Casa</option>
-          <option>Chalet</option>
-          <option>Ático</option>
-          <option>Dúplex</option>
-          <option>Adosado</option>
-          <option>Terreno</option>
-          <option>Local</option>
-          <option>Otro</option>
-        </select>
-      </label>
-
-      <label class="field full">
-        <span>Título del anuncio</span>
-        <input
-          [(ngModel)]="draft.title"
-          placeholder="Ej. Piso luminoso de tres dormitorios"
-          maxlength="100"
-        >
-      </label>
-
-      <label class="field">
-        <span>Precio (€)</span>
-        <input
-          type="number"
-          [(ngModel)]="draft.price_eur"
-          placeholder="Por confirmar"
-          min="0"
-        >
-      </label>
-
-      <label class="field">
-        <span>Provincia</span>
-        <input [(ngModel)]="draft.province" placeholder="Provincia">
-      </label>
-
-      <label class="field">
-        <span>Localidad</span>
-        <input [(ngModel)]="draft.city" placeholder="Localidad">
-      </label>
-
-      <label class="field full">
-        <span>Dirección o zona publicable</span>
-        <input
-          [(ngModel)]="draft.address"
-          placeholder="Solo la información que se quiera publicar"
-        >
-        <small class="field-hint">Evita incluir datos privados del propietario en el anuncio.</small>
-      </label>
-    </div>
-
-    <!-- CARACTERÍSTICAS -->
-    <div class="form-section-title separated">
-      <span>02</span>
-      <div>
-        <h3>Características del inmueble</h3>
-        <p>Superficies, distribución, equipamiento y estado de conservación.</p>
-      </div>
-    </div>
-
-    <div class="form-grid three-cols">
-      <label class="field">
-        <span>Superficie construida (m²)</span>
-        <input type="number" [(ngModel)]="draft.built_area_m2" min="0">
-      </label>
-
-      <label class="field">
-        <span>Superficie útil (m²)</span>
-        <input type="number" [(ngModel)]="draft.usable_area_m2" min="0">
-      </label>
-
-      <label class="field">
-        <span>Dormitorios</span>
-        <input type="number" [(ngModel)]="draft.bedrooms" min="0">
-      </label>
-
-      <label class="field">
-        <span>Baños</span>
-        <input type="number" [(ngModel)]="draft.bathrooms" min="0">
-      </label>
-
-      <label class="field">
-        <span>Planta</span>
-        <input [(ngModel)]="draft.floor" placeholder="No consta">
-      </label>
-
-      <label class="field">
-        <span>Estado de conservación</span>
-        <select
-          [ngModel]="draft.condition"
-          (ngModelChange)="onSelectChange('condition', $event)"
-        >
-          <option>No consta</option>
-          <option>A reformar</option>
-          <option>Buen estado</option>
-          <option>Reformado</option>
-          <option>Obra nueva</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Ascensor</span>
-        <select
-          [ngModel]="draft.elevator"
-          (ngModelChange)="onSelectChange('elevator', $event)"
-        >
-          <option>No consta</option>
-          <option>Sí</option>
-          <option>No</option>
-          <option>Dispone</option>
-          <option>No dispone</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Terraza</span>
-        <select
-          [ngModel]="draft.terrace"
-          (ngModelChange)="onSelectChange('terrace', $event)"
-        >
-          <option>No consta</option>
-          <option>Sí</option>
-          <option>No</option>
-          <option>Dispone</option>
-          <option>No dispone</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Garaje</span>
-        <select
-          [ngModel]="draft.parking"
-          (ngModelChange)="onSelectChange('parking', $event)"
-        >
-          <option>No consta</option>
-          <option>Sí</option>
-          <option>No</option>
-          <option>Incluido</option>
-          <option>No incluido</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Trastero</span>
-        <select
-          [ngModel]="draft.storage_room"
-          (ngModelChange)="onSelectChange('storage_room', $event)"
-        >
-          <option>No consta</option>
-          <option>Sí</option>
-          <option>No</option>
-          <option>Incluido</option>
-          <option>No incluido</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span>Calificación energética</span>
-        <input [(ngModel)]="draft.energy_rating" placeholder="No consta">
-      </label>
-    </div>
-
-    <!-- DESCRIPCIÓN -->
-    <div class="form-section-title separated">
-      <span>03</span>
-      <div>
-        <h3>Descripción comercial</h3>
-        <p>Redacta, genera y revisa el texto antes de utilizarlo.</p>
-      </div>
-    </div>
-
-    <label class="field">
-      <span>Descripción del inmueble</span>
-      <textarea
-        [(ngModel)]="draft.description"
-        rows="7"
-        maxlength="3000"
-        placeholder="La descripción del inmueble aparecerá aquí..."
-      ></textarea>
-      <small class="field-hint">
-        {{ generating
-          ? 'Actualizando la descripción…'
-          : 'Se rehace automáticamente al cambiar un desplegable y sustituye lo que hayas escrito. Evita afirmaciones no verificadas sobre vistas, orientación o servicios cercanos.' }}
-      </small>
-    </label>
-
-    <!-- ACCIONES -->
-    <div class="form-section-title separated">
-      <span>04</span>
-      <div>
-        <h3>Preparar documentación</h3>
-        <p>Elige cómo quieres continuar con el borrador.</p>
-      </div>
-    </div>
-
-    <div class="action-panel">
-      <div class="action-card word-action">
-       
-        <div class="action-copy">
-          <h4>Solicitud de información al propietario</h4>
-          <p>Prepara un documento Word editable con los datos que faltan por confirmar.</p>
-          <small>DOCX · Editable en Microsoft Word y aplicaciones compatibles</small>
         </div>
-        <button
-          class="primary-button"
-          type="button"
-          (click)="generateMissingInfoWord()"
-          [disabled]="!analyzed || loading || generatingWord"
-        >
-          <span *ngIf="!generatingWord">↓ Generar solicitud Word</span>
-          <span *ngIf="generatingWord">Preparando documento…</span>
-        </button>
-      </div>
 
-      <div class="action-card">
-  
-        <div class="action-copy">
-          <h4>Anuncio completo</h4>
-          <p>Copia el título, precio, características, descripción y comprobaciones pendientes.</p>
+        <p class="confidence-note">{{ draft.confidence_note }}</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-brand">
+        <div class="brand-mark">
+          <img src="/assets/inmobili-ai-logo.svg" alt="Logotipo de InmobiliAI">
         </div>
-        <button
-          class="secondary-button"
-          type="button"
-          (click)="copyListing()"
-          [disabled]="!analyzed || loading || generatingWord"
-        >
-          Copiar anuncio
-        </button>
+        <strong>InmobiliAI</strong>
       </div>
-    </div>
-
-    <div class="privacy-footnote">
-      <span>ⓘ</span>
-      Revisa el documento Word antes de enviarlo. La herramienta no contacta con el propietario ni publica anuncios por su cuenta.
-    </div>
-  </div>
-
-  <!-- DATOS EXTRAÍDOS -->
-  <div class="facts-card" *ngIf="draft.extracted_facts.length">
-    <div class="facts-heading">
-      <div>
-        <div class="section-kicker">TRAZABILIDAD</div>
-        <h3>Datos detectados en el documento</h3>
-      </div>
-      <span class="facts-count">{{ draft.extracted_facts.length }} elementos</span>
-    </div>
-
-    <p>Contrasta estos elementos con el documento original para verificar la extracción.</p>
-
-    <div class="fact-list">
-      <span *ngFor="let fact of draft.extracted_facts">
-        <span class="fact-check">✓</span>
-        {{ fact }}
-      </span>
-    </div>
-
-    <p class="confidence-note">{{ draft.confidence_note }}</p>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-brand">
-    <div class="brand-mark small-mark">P</div>
-    <strong>InmobiliAI</strong>
-  </div>
-  <span>Demo de portfolio · La revisión y publicación final corresponden al profesional inmobiliario.</span>
-</footer>
+      <span>Demo de portfolio · Alvaro Ruiz Ramírez</span>
+    </footer>
 
 
   </main>
