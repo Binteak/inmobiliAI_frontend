@@ -1,8 +1,8 @@
-
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 import { environment } from '../environments/environment';
 
@@ -32,10 +32,20 @@ interface PropertyDraft {
   mode: string;
 }
 
+// Campos desplegables que regeneran la descripción al cambiar.
+type SelectField =
+  | 'operation'
+  | 'property_type'
+  | 'condition'
+  | 'elevator'
+  | 'terrace'
+  | 'parking'
+  | 'storage_room';
+
 interface SampleFile {
   name: string;
   size: number;
-  download_url: string;
+  download_url?: string;
 }
 
 const emptyDraft = (): PropertyDraft => ({
@@ -75,6 +85,10 @@ export class AppComponent {
 
   readonly apiUrl = environment.apiUrl;
 
+  // Los PDF de prueba se sirven desde el frontend (public/samples/).
+  // En Angular 17 o anterior cambia a 'assets/samples'.
+  readonly samplesPath = 'samples';
+
   selectedFile: File | null = null;
   draft: PropertyDraft = emptyDraft();
 
@@ -93,10 +107,22 @@ export class AppComponent {
 
   usingSample: string | null = null;
 
+  private descriptionRequest: Subscription | null = null;
+
 
 
   constructor(private readonly http: HttpClient) {
     this.loadSampleFiles();
+    this.wakeUpBackend();
+  }
+
+  // ============================================================
+  // DESPERTAR EL BACKEND (Render en plan gratuito se duerme)
+  // ============================================================
+  private wakeUpBackend(): void {
+    this.http.get(`${this.apiUrl}/health`).subscribe({
+      error: () => { /* silencioso: solo es un aviso de arranque */ }
+    });
   }
 
   // ============================================================
@@ -108,7 +134,7 @@ export class AppComponent {
   this.success = '';
 
   this.http.get(
-    `${this.apiUrl}/api/samples/${encodeURIComponent(file.name)}`,
+    `${this.samplesPath}/${encodeURIComponent(file.name)}`,
     { responseType: 'blob' }
   ).subscribe({
     next: (blob) => {
@@ -141,7 +167,7 @@ export class AppComponent {
 
     this.http
       .get<{ files: SampleFile[] }>(
-        `${this.apiUrl}/api/samples`
+        `${this.samplesPath}/samples.json`
       )
       .subscribe({
         next: (result) => {
@@ -150,7 +176,7 @@ export class AppComponent {
 
           if (this.sampleFiles.length === 0) {
             this.samplesError =
-              'La API funciona, pero no ha encontrado archivos PDF en backend/samples/.';
+              'samples.json no contiene ningún archivo de prueba.';
           }
         },
         error: (err: HttpErrorResponse) => {
@@ -178,7 +204,7 @@ export class AppComponent {
 
     this.http
       .get(
-        `${this.apiUrl}/api/samples/${encodeURIComponent(file.name)}`,
+        `${this.samplesPath}/${encodeURIComponent(file.name)}`,
         { responseType: 'blob' }
       )
       .subscribe({
@@ -204,7 +230,7 @@ export class AppComponent {
           this.downloadingSample = null;
           this.error =
             `No se ha podido descargar ${file.name}. ` +
-            'Comprueba que el backend esté disponible.';
+            'Comprueba que el archivo exista en public/samples/.';
         }
       });
   }
@@ -291,6 +317,8 @@ export class AppComponent {
 
             this.success =
               'Análisis completado. Revisa todos los campos antes de publicar.';
+
+            this.scrollToResults();
           }, remaining);
         },
         error: (err: HttpErrorResponse) => {
@@ -310,16 +338,35 @@ export class AppComponent {
       });
   }
 
+  // Baja a la sección de resultados cuando Angular ya la ha pintado.
+  private scrollToResults(): void {
+    window.setTimeout(() => {
+      document.getElementById('results')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 100);
+  }
+
   // ============================================================
   // GENERACIÓN DE LA DESCRIPCIÓN
   // ============================================================
 
+  // Se llama desde cada desplegable: guarda el valor y rehace el texto.
+  onSelectChange(field: SelectField, value: string): void {
+    this.draft[field] = value;
+    this.generateDescription();
+  }
+
   generateDescription(): void {
+    // Si el usuario cambia varios desplegables seguidos, solo cuenta el último.
+    this.descriptionRequest?.unsubscribe();
+
     this.generating = true;
     this.error = '';
     this.success = '';
 
-    this.http
+    this.descriptionRequest = this.http
       .post<{ description: string; mode: string }>(
         `${this.apiUrl}/api/generate-description`,
         { property_data: this.draft }

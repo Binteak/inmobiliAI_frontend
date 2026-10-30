@@ -212,7 +212,7 @@
     *ngIf="!loadingSamples && sampleFiles.length === 0"
     class="samples-message"
   >
-    No hay documentos de prueba disponibles.
+    {{ samplesError || 'No hay documentos de prueba disponibles.' }}
   </div>
 
   <p class="sample-files-note">
@@ -235,7 +235,7 @@
 </div>
 
 <!-- PASO 02: RESULTADOS -->
-<section class="results-section" *ngIf="analyzed">
+<section class="results-section" id="results" *ngIf="analyzed">
 
 
   <div class="results-heading">
@@ -286,7 +286,10 @@
     <div class="form-grid">
       <label class="field">
         <span>Operación</span>
-        <select [(ngModel)]="draft.operation">
+        <select
+          [ngModel]="draft.operation"
+          (ngModelChange)="onSelectChange('operation', $event)"
+        >
           <option>Venta</option>
           <option>Alquiler</option>
         </select>
@@ -294,7 +297,10 @@
 
       <label class="field">
         <span>Tipo de inmueble</span>
-        <select [(ngModel)]="draft.property_type">
+        <select
+          [ngModel]="draft.property_type"
+          (ngModelChange)="onSelectChange('property_type', $event)"
+        >
           <option>Piso</option>
           <option>Casa</option>
           <option>Chalet</option>
@@ -383,7 +389,10 @@
 
       <label class="field">
         <span>Estado de conservación</span>
-        <select [(ngModel)]="draft.condition">
+        <select
+          [ngModel]="draft.condition"
+          (ngModelChange)="onSelectChange('condition', $event)"
+        >
           <option>No consta</option>
           <option>A reformar</option>
           <option>Buen estado</option>
@@ -394,7 +403,10 @@
 
       <label class="field">
         <span>Ascensor</span>
-        <select [(ngModel)]="draft.elevator">
+        <select
+          [ngModel]="draft.elevator"
+          (ngModelChange)="onSelectChange('elevator', $event)"
+        >
           <option>No consta</option>
           <option>Sí</option>
           <option>No</option>
@@ -405,7 +417,10 @@
 
       <label class="field">
         <span>Terraza</span>
-        <select [(ngModel)]="draft.terrace">
+        <select
+          [ngModel]="draft.terrace"
+          (ngModelChange)="onSelectChange('terrace', $event)"
+        >
           <option>No consta</option>
           <option>Sí</option>
           <option>No</option>
@@ -416,7 +431,10 @@
 
       <label class="field">
         <span>Garaje</span>
-        <select [(ngModel)]="draft.parking">
+        <select
+          [ngModel]="draft.parking"
+          (ngModelChange)="onSelectChange('parking', $event)"
+        >
           <option>No consta</option>
           <option>Sí</option>
           <option>No</option>
@@ -427,7 +445,10 @@
 
       <label class="field">
         <span>Trastero</span>
-        <select [(ngModel)]="draft.storage_room">
+        <select
+          [ngModel]="draft.storage_room"
+          (ngModelChange)="onSelectChange('storage_room', $event)"
+        >
           <option>No consta</option>
           <option>Sí</option>
           <option>No</option>
@@ -460,7 +481,9 @@
         placeholder="La descripción del inmueble aparecerá aquí..."
       ></textarea>
       <small class="field-hint">
-        Evita afirmaciones no verificadas sobre vistas, orientación, servicios cercanos o características que no aparezcan en la documentación.
+        {{ generating
+          ? 'Actualizando la descripción…'
+          : 'Se rehace automáticamente al cambiar un desplegable y sustituye lo que hayas escrito. Evita afirmaciones no verificadas sobre vistas, orientación o servicios cercanos.' }}
       </small>
     </label>
 
@@ -474,22 +497,6 @@
     </div>
 
     <div class="action-panel">
-      <div class="action-card">
-       
-        <div class="action-copy">
-          <h4>Descripción comercial</h4>
-          <p>Genera una nueva versión del texto usando los datos actuales del inmueble.</p>
-        </div>
-        <button
-          class="secondary-button"
-          type="button"
-          (click)="generateDescription()"
-          [disabled]="generating || loading || generatingWord"
-        >
-          {{ generating ? 'Generando…' : 'Regenerar descripción' }}
-        </button>
-      </div>
-
       <div class="action-card word-action">
        
         <div class="action-copy">
